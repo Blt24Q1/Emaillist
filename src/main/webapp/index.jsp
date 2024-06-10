@@ -1,3 +1,7 @@
+<%@page import="himedia.vo.EmailVo"%>
+<%@page import="java.util.List"%>
+<%@page import="himedia.dao.EmaillistDaoOracleImpl"%>
+<%@page import="himedia.dao.EmaillistDao"%>
 <%@ page import="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -30,6 +34,7 @@ function delete_item(event, frm) {
 	<h1>메일링 리스트</h1>
 	<h3>Model 1 방식</h3>
 <%
+/*
 String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 
 try {
@@ -44,28 +49,35 @@ try {
 	ResultSet rs = stmt.executeQuery(sql);
 	
 	while(rs.next()) {
+		*/
+EmaillistDao dao = new EmaillistDaoOracleImpl(dbuser, dbpass);
+List<EmailVo> list = dao.getList();
+
+for (EmailVo vo: list) {
 %>
 	<!-- 리스트 -->
 	<!-- vo 객체의 getter를 이용, 리스트를 표시 -->
 	<table border="1" cellpadding="5" cellspacing="2">
 		<tr>
 			<th>성</th>
-			<td><%= rs.getString("last_name") %></td>
+			<td><%-- = rs.getString("last_name") --%><%= vo.getLastName() %></td>
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td><%= rs.getString("first_name") %></td>
+			<td><%--= rs.getString("first_name") --%><%= vo.getFirstName() %></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><%= rs.getString("email") %></td>
+			<td><%--= rs.getString("email") --%><%= vo.getEmail() %></td>
 		</tr>
 		<tr class="toolbar">
 			<td colspan="2">
 			<form method="POST"
 				action="<%= request.getContextPath() %>/delete.jsp"
 				onsubmit="delete_item(event, this)">
-				<input type="hidden" name="no" value="<%= rs.getString("no") %>">
+				<input type="hidden" 
+					name="no" 
+					value="<%--= rs.getString("no") --%><%= vo.getNo() %>">
 				<button type="submit">삭제</button>	
 			</form>
 			</td>
@@ -74,6 +86,8 @@ try {
 	<br />
 	<!-- /End -->
 <%
+}
+	/*
 	}
 	
 	rs.close();
@@ -84,6 +98,7 @@ try {
 } catch (Exception e) {
 	throw e;
 }
+*/
 %>
 	<p>
 	<!-- ContextPath를 받아와서 form.jsp에 링크 -->
