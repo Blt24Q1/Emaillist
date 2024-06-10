@@ -34,22 +34,6 @@ function delete_item(event, frm) {
 	<h1>메일링 리스트</h1>
 	<h3>Model 1 방식</h3>
 <%
-/*
-String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-
-try {
-	//	드라이버 로드
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	//	데이터베이스 연결
-	Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass);
-	//	Statement 생성
-	Statement stmt = conn.createStatement();
-	//	SQL 실행
-	String sql = "SELECT * FROM emaillist ORDER BY created_at DESC";
-	ResultSet rs = stmt.executeQuery(sql);
-	
-	while(rs.next()) {
-		*/
 EmaillistDao dao = new EmaillistDaoOracleImpl(dbuser, dbpass);
 List<EmailVo> list = dao.getList();
 
@@ -87,18 +71,6 @@ for (EmailVo vo: list) {
 	<!-- /End -->
 <%
 }
-	/*
-	}
-	
-	rs.close();
-	stmt.close();
-	conn.close();
-} catch (ClassNotFoundException e) {
-	throw new ClassNotFoundException("드라이버를 찾을 수 없습니다.");
-} catch (Exception e) {
-	throw e;
-}
-*/
 %>
 	<p>
 	<!-- ContextPath를 받아와서 form.jsp에 링크 -->
