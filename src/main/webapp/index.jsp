@@ -12,6 +12,19 @@ String dbpass = context.getInitParameter("dbpass");
 <head>
 <meta charset="UTF-8">
 <title>메일링 리스트:메인</title>
+<link type="text/css" 
+	rel="stylesheet" 
+	href="<%= request.getContextPath() %>/css/list.css" />
+<script>
+function delete_item(event, frm) {
+	event.preventDefault();
+	
+	let choice = confirm("메일을 삭제하시겠습니까?");
+	if (choice) {
+		frm.submit();
+	}
+}
+</script>
 </head>
 <body>
 	<h1>메일링 리스트</h1>
@@ -46,6 +59,16 @@ try {
 		<tr>
 			<th>이메일</th>
 			<td><%= rs.getString("email") %></td>
+		</tr>
+		<tr class="toolbar">
+			<td colspan="2">
+			<form method="POST"
+				action="<%= request.getContextPath() %>/delete.jsp"
+				onsubmit="delete_item(event, this)">
+				<input type="hidden" name="no" value="<%= rs.getString("no") %>">
+				<button type="submit">삭제</button>	
+			</form>
+			</td>
 		</tr>
 	</table>
 	<br />
