@@ -65,11 +65,24 @@ public class EmaillistServlet extends BaseServlet {
 			
 			if (success) {
 				System.out.println("INSERT SUCCESS");
+				resp.sendRedirect(req.getContextPath() + "/el");	//	Redirect (3xx)
 			} else {
 				System.out.println("INSERT FAILED");
+				resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "데이터 입력 중 오류가 발생했습니다.");
 			}
 			
-			resp.sendRedirect(req.getContextPath() + "/el");
+			
+		} else if ("delete".equals(actionName)) {
+			Long no = Long.valueOf(req.getParameter("no"));
+			EmaillistDao dao = new EmaillistDaoOracleImpl(dbuser, dbpass);
+			boolean success = dao.delete(no);
+			
+			if (success) {
+				System.out.println("Delete Success");
+				resp.sendRedirect(req.getContextPath() + "/el");
+			} else {
+				resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "데이터 삭제 중 오류가 발생했습니다.");
+			}
 		} else {
 			super.doPost(req, resp);	
 		}

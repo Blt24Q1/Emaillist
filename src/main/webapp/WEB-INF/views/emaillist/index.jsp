@@ -54,9 +54,11 @@ function delete_item(event, frm) {
 			<form method="POST"
 				action="<%= request.getContextPath() %>/emaillist/delete.jsp"
 				onsubmit="delete_item(event, this)">
+				<input type="hidden"
+					name="a" value="delete" />
 				<input type="hidden" 
 					name="no" 
-					value="">
+					value="<%= vo.getNo() %>">
 				<button type="submit">삭제</button>	
 			</form>
 			</td>
