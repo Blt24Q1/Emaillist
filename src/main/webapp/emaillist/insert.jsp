@@ -1,6 +1,7 @@
 <%@page import="himedia.dao.EmaillistDaoOracleImpl"%>
 <%@page import="himedia.dao.EmaillistDao"%>
 <%@page import="himedia.vo.EmailVo"%>
+<%@page import="jakarta.servlet.http.HttpServletResponse" %>
 <%@ page import="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,9 +25,6 @@ boolean success = dao.insert(vo);
 if (success) {	//	INSERT 성공
 	response.sendRedirect(request.getContextPath() + "/emaillist/");
 } else {
-		%>
-		<h1>Error</h1>
-		<p>데이터 입력 중 오류가 발생했습니다</p>
-		<%
+	response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "데이터 입력 중 오류가 발생했습니다.");
 }
 %>

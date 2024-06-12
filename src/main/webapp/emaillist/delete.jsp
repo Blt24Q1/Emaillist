@@ -19,9 +19,6 @@ boolean success = dao.delete(no);
 if (success) {
 	response.sendRedirect(request.getContextPath() + "/emaillist/");	
 } else {
-		%>
-		<h1>Error</h1>
-		<p>아이템을 삭제하지 못했습니다.</p>
-		<%
+	response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "아이템을 삭제하지 못했습니다.");
 }
 %>
