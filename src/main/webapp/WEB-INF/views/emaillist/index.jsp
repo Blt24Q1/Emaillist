@@ -69,7 +69,7 @@ function delete_item(event, frm) {
 	<!-- /End -->
 	<p>
 	<!-- ContextPath를 받아와서 form.jsp에 링크 -->
-		<a href="<%= request.getContextPath() %>/emaillist/form.jsp">추가 이메일 등록</a>
+		<a href="<%= request.getContextPath() %>/el?a=form">추가 이메일 등록</a>
 	</p>
 
 </body>
