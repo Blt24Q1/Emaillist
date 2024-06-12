@@ -12,7 +12,8 @@
 	<li><a 
 		href="<%= request.getContextPath() + "/emaillist/" %>">
 			Model1 방식</a></li>
-	<li>Model 2 방식 (Servlet + JSP)</li>
+	<li><a 
+		href="<%= request.getContextPath() + "/el" %>">Model 2 방식 (Servlet + JSP)</a></li>
 </ul>
 
 

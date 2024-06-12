@@ -1,5 +1,14 @@
+<%@ page import="himedia.vo.EmailVo"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+//	Servlet으로부터 전달한 list 객체 얻어오기
+List<EmailVo> list = null;
+if (request.getAttribute("list") instanceof List) {	//	전달 받은 list가 List인지 확인
+	list = (List<EmailVo>)request.getAttribute("list");	//	다운 캐스팅
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,19 +32,22 @@ function delete_item(event, frm) {
 	<h1>메일링 리스트</h1>
 	<h3>Model 2 방식</h3>
 	<!-- 리스트 -->
+	<%
+	for (EmailVo vo: list) {
+		%>
 	<!-- vo 객체의 getter를 이용, 리스트를 표시 -->
 	<table border="1" cellpadding="5" cellspacing="2">
 		<tr>
 			<th>성</th>
-			<td></td>
+			<td><%= vo.getLastName() %></td>
 		</tr>
 		<tr>
 			<th>이름</th>
-			<td></td>
+			<td><%= vo.getFirstName() %></td>
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td></td>
+			<td><%= vo.getEmail() %></td>
 		</tr>
 		<tr class="toolbar">
 			<td colspan="2">
@@ -51,6 +63,9 @@ function delete_item(event, frm) {
 		</tr>
 	</table>
 	<br />
+		<%
+	}
+	%>
 	<!-- /End -->
 	<p>
 	<!-- ContextPath를 받아와서 form.jsp에 링크 -->
